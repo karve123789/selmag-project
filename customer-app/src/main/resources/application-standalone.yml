@@ -25,7 +25,8 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://172.17.0.1:8082/realms/selmag
+            issuer-uri: http://localhost:8082/realms/selmag
+#            issuer-uri: http://172.17.0.1:8082/realms/selmag
             user-name-attribute: preferred_username
         registration:
           keycloak:
@@ -44,7 +45,8 @@ spring:
               - metrics_server
       resourceserver:
         jwt:
-          issuer-uri: http://172.17.0.1:8082/realms/selmag
+          issuer-uri: http://localhost:8082/realms/selmag
+#          issuer-uri: http://172.17.0.1:8082/realms/selmag
 management:
   health:
     livenessstate:
@@ -55,12 +57,12 @@ management:
     web:
       exposure:
         include: '*'
-  zipkin:
-    tracing:
-      endpoint: http://172.17.0.1:9411/api/v2/spans
-  tracing:
-    sampling:
-      probability: 1.0
+#  zipkin:
+#    tracing:
+#      endpoint: http://172.17.0.1:9411/api/v2/spans
+#  tracing:
+#    sampling:
+#      probability: 1.0
 eureka:
   client:
     enabled: false
