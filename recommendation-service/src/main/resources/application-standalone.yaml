@@ -3,3 +3,31 @@ server:
 spring:
   application:
     name: recommendation-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalogue
+    username: catalogue
+    password: catalogue
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    schemas:
+      - rating
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8082/realms/selmag
+#            user-name-attribute: preferred_username
+#        registration:
+#          rating-service-app:
+#            provider: keycloak
+#            client-id: recommendation-service
+#            client-secret: wWWhkmIjaOYfcvhEWskT7ryVoP6ZNym9
+#            authorization-grant-type: client_credentials
+#            scope:
+#              - openid
+#              - view_catalogue
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8082/realms/selmag #  issuer-uri
