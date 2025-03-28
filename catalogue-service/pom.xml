@@ -39,6 +39,10 @@
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
@@ -78,7 +82,7 @@
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
         </dependency>
-<!--        <dependency>-->
+        <!--        <dependency>-->
 <!--            <groupId>io.micrometer</groupId>-->
 <!--            <artifactId>micrometer-tracing</artifactId>-->
 <!--        </dependency>-->
@@ -90,15 +94,15 @@
 <!--            <groupId>io.opentelemetry</groupId>-->
 <!--            <artifactId>opentelemetry-exporter-zipkin</artifactId>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>net.ttddyy.observation</groupId>
-            <artifactId>datasource-micrometer-spring-boot</artifactId>
-            <version>1.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>net.ttddyy.observation</groupId>-->
+<!--            <artifactId>datasource-micrometer-spring-boot</artifactId>-->
+<!--            <version>1.0.3</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
@@ -128,6 +132,15 @@
             <groupId>org.springframework.restdocs</groupId>
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ag.selm</groupId> <!-- Замените на GroupId вашего проекта -->
+            <artifactId>new-product-event-model</artifactId>
+            <version>${project.version}</version> <!-- Используйте версию родительского проекта или укажите конкретную версию -->
         </dependency>
     </dependencies>
 

@@ -3,6 +3,8 @@ package ag.selm.recommendationservice.controller;
 import ag.selm.recommendationservice.entity.ProductRating;
 import ag.selm.recommendationservice.service.RatingService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,9 +41,12 @@ public class RatingController {
             List<ProductRating> productRatings = ratingService.getAllProductRatings();
             logger.info("Получено рейтингов {}", productRatings.size());
             model.addAttribute("productRatings", productRatings);
+            model.addAttribute("ratingsLoaded", true); //  Флаг для отображения контента
         }
         catch (Exception exception){
             logger.error(exception.getMessage(), exception);
+            model.addAttribute("errorMessage", "Ошибка при загрузке рейтингов."); // Сообщение об ошибке
+            model.addAttribute("ratingsLoaded", false); //  Устанавливаем флаг в false при ошибке
         }
 
         return "recommendations/list"; // Путь к Thymeleaf шаблону

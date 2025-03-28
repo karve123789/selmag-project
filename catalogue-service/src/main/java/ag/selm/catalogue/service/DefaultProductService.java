@@ -1,12 +1,13 @@
 package ag.selm.catalogue.service;
 
+import ag.selm.NewProductEvent;
 import ag.selm.catalogue.entity.Product;
+import ag.selm.catalogue.kafka.KafkaProductProducer;
 import ag.selm.catalogue.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class DefaultProductService implements ProductService {
 
     private final ProductRepository productRepository;
+    private final KafkaProductProducer kafkaProductProducer;
 
     @Override
     public Iterable<Product> findAllProducts(String filter) {
@@ -28,7 +30,16 @@ public class DefaultProductService implements ProductService {
     @Override
     @Transactional
     public Product createProduct(String title, String details) {
-        return this.productRepository.save(new Product(null, title, details));
+        Product product = this.productRepository.save(new Product(null, title, details));
+
+        // Отправляем сообщение в Kafka
+        NewProductEvent newProductEvent = new NewProductEvent();
+        newProductEvent.setProductId(product.getId());
+        newProductEvent.setTitle(product.getTitle());
+        newProductEvent.setDetails(product.getDetails());
+        kafkaProductProducer.sendNewProductEvent(newProductEvent);
+
+        return product;
     }
 
     @Override

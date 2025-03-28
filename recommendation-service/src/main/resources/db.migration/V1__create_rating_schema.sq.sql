@@ -10,4 +10,3 @@ INSERT INTO rating.product_rating (product_id, rating_average, rating_count) VAL
                                                                                  (1, 4, 100),
                                                                                  (2, 5, 50),
                                                                                  (3, 3, 200)
-    ON CONFLICT (product_id) DO NOTHING;                               (3, 3, 200);
