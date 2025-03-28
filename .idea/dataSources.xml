@@ -1,32 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="postgres@localhost" uuid="694f0421-d9df-452d-90d9-ea2c574af8d8">
+    <data-source source="LOCAL" name="catalogue@localhost" uuid="a2fb4743-0aa2-4432-bac7-b6d726c9155a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="com.intellij.clouds.kubernetes.db.host.port" />
-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
-        <property name="com.intellij.clouds.kubernetes.db.container.port" />
-      </jdbc-additional-properties>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="catalogue@catalogue-db-svc.selmag.svc.cluster.local" uuid="438445a3-fb1e-4ba9-bd68-d54889deca0f">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/catalogue-service/src/main/resources/application-k8s.yml</remarks>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://catalogue-db-svc.selmag.svc.cluster.local:5432/catalogue</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="catalogue@localhost" uuid="dcd1f699-3e31-4165-bae5-6b2e08cc9212">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/recommendation-service/src/main/resources/application-standalone.yaml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/catalogue</jdbc-url>
       <jdbc-additional-properties>
@@ -36,25 +13,7 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="feedback@localhost" uuid="8d685480-20d0-4b43-8bbd-2c01dde22b23">
-      <driver-ref>mongo.4</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/feedback-service/src/main/resources/application-cloud.yml</remarks>
-      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
-      <jdbc-url>mongodb://localhost:27017/feedback</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="manager@localhost" uuid="babd5874-d7cc-4aee-a292-7471edc4acd5">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/manager-app/src/main/resources/application-cloud.yaml</remarks>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5433/manager</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="feedback@feedback-db-svc.selmag.svc.cluster.local" uuid="381505d5-daad-4565-9689-19b1cdd776ed">
+    <data-source source="LOCAL" name="feedback@feedback-db-svc.selmag.svc.cluster.local" uuid="e9537815-24cc-453a-8642-72f78a47b215">
       <driver-ref>mongo.4</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
@@ -63,13 +22,42 @@
       <jdbc-url>mongodb://feedback-db-svc.selmag.svc.cluster.local:27017/feedback</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="catalogue@localhost" uuid="62c9d8e4-2b8e-49a7-a7f5-b81c84bfaf5a">
+    <data-source source="LOCAL" name="manager@localhost" uuid="b530240a-a90b-45ca-87d0-dd5746439204">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
-      <remarks>$PROJECT_DIR$/catalogue-service/src/main/resources/application-cloud.yaml</remarks>
+      <remarks>$PROJECT_DIR$/manager-app/src/main/resources/application-cloud.yaml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/catalogue</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5433/manager</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
+        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="feedback@localhost" uuid="28c12991-b3e1-434e-9a59-8ef61f528eab">
+      <driver-ref>mongo.4</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/feedback-service/src/main/resources/application-cloud.yml</remarks>
+      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
+      <jdbc-url>mongodb://localhost:27017/feedback</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="catalogue@catalogue-db-svc.selmag.svc.cluster.local" uuid="4302e08d-9a4f-4ad3-8189-2afc6d1f706d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/catalogue-service/src/main/resources/application-k8s.yml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://catalogue-db-svc.selmag.svc.cluster.local:5432/catalogue</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+      </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

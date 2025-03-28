@@ -12,6 +12,15 @@ spring:
     locations: classpath:db/migration
     schemas:
       - rating
+  kafka:
+    consumer:
+      group-id: recommendation-service # ID группы потребителей
+      auto-offset-reset: earliest #  Что делать, если нет начального offset-а или offset не существует на сервере
+    bootstrap-servers: localhost:9092 #  Адрес Kafka broker
+  cloud:
+    config:
+      enabled: false  # Отключаем Spring Cloud Config
+
 #  security:
 #    oauth2:
 #      client:

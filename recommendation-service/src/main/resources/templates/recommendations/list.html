@@ -1,11 +1,77 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Ratings</title>
+    <title>Product Recommendations</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #444;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        p {
+            color: #777;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-<h1>Ratings</h1>
-<p th:text="'Ratings loaded!'"></p>
+<h1>Product Recommendations Service</h1>
+<p>Displaying product ratings from the recommendation service.</p>
+
+<div th:if="${ratingsLoaded}">
+    <h2>Product Ratings:</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Average Rating</th>
+            <th>Rating Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="rating : ${productRatings}">
+            <td th:text="${rating.productId}"></td>
+            <td th:text="${rating.ratingAverage}"></td>
+            <td th:text="${rating.ratingCount}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:unless="${ratingsLoaded}">
+    <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+    <p>Failed to load product ratings.</p>
+</div>
 </body>
 </html>
