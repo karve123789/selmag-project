@@ -33,10 +33,8 @@ public class DefaultProductService implements ProductService {
         Product product = this.productRepository.save(new Product(null, title, details));
 
         // Отправляем сообщение в Kafka
-        NewProductEvent newProductEvent = new NewProductEvent();
-        newProductEvent.setProductId(product.getId());
-        newProductEvent.setTitle(product.getTitle());
-        newProductEvent.setDetails(product.getDetails());
+        NewProductEvent newProductEvent = new NewProductEvent(product.getId(), product.getTitle(), product.getDetails());
+
         kafkaProductProducer.sendNewProductEvent(newProductEvent);
 
         return product;

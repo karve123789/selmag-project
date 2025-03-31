@@ -9,5 +9,7 @@ public interface RatingService {
     Optional<ProductRating> getProductRating(Integer productId);
 
     List<ProductRating> getAllProductRatings();
+
+    void saveProductRatingRecord(Integer productId, Integer rating);
 }
 

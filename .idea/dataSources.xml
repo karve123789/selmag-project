@@ -13,15 +13,6 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="feedback@feedback-db-svc.selmag.svc.cluster.local" uuid="e9537815-24cc-453a-8642-72f78a47b215">
-      <driver-ref>mongo.4</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/feedback-service/src/main/resources/application-k8s.yml</remarks>
-      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
-      <jdbc-url>mongodb://feedback-db-svc.selmag.svc.cluster.local:27017/feedback</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="manager@localhost" uuid="b530240a-a90b-45ca-87d0-dd5746439204">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
@@ -44,20 +35,6 @@
       <remarks>$PROJECT_DIR$/feedback-service/src/main/resources/application-cloud.yml</remarks>
       <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
       <jdbc-url>mongodb://localhost:27017/feedback</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="catalogue@catalogue-db-svc.selmag.svc.cluster.local" uuid="4302e08d-9a4f-4ad3-8189-2afc6d1f706d">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/catalogue-service/src/main/resources/application-k8s.yml</remarks>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://catalogue-db-svc.selmag.svc.cluster.local:5432/catalogue</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="com.intellij.clouds.kubernetes.db.host.port" />
-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
-        <property name="com.intellij.clouds.kubernetes.db.container.port" />
-      </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

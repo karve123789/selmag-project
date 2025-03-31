@@ -4,14 +4,14 @@ spring:
   application:
     name: recommendation-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/catalogue
+    url: jdbc:postgresql://localhost:5432/catalogue?currentSchema=rating
     username: catalogue
     password: catalogue
   flyway:
-    enabled: true
-    locations: classpath:db/migration
-    schemas:
-      - rating
+    enabled: false
+#    locations: classpath:db/migration
+#    schemas:
+#      - rating
   kafka:
     consumer:
       group-id: recommendation-service # ID группы потребителей
@@ -19,7 +19,8 @@ spring:
     bootstrap-servers: localhost:9092 #  Адрес Kafka broker
   cloud:
     config:
-      enabled: false  # Отключаем Spring Cloud Config
+      import-check:
+        enabled: false # Отключаем Spring Cloud Config
 
 #  security:
 #    oauth2:

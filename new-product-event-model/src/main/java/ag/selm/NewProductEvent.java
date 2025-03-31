@@ -2,6 +2,7 @@ package ag.selm;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ public class NewProductEvent {
     private String title;
     private String details;
 
-    @JsonCreator
+    @JsonCreator //Оставьте только эту аннотацию и убедитесь, что имена параметров соответствуют JSON
     public NewProductEvent(@JsonProperty("productId") Integer productId,
                            @JsonProperty("title") String title,
                            @JsonProperty("details") String details) {
