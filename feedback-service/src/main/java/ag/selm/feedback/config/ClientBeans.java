@@ -17,8 +17,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class ClientBeans {
 
-    @Bean
-    @ConditionalOnProperty(name = "spring.boot.admin.client.enabled", havingValue = "true")
+//    @Bean
+//    @ConditionalOnProperty(name = "spring.boot.admin.client.enabled", havingValue = "true")
     public RegistrationClient registrationClient(
             ClientProperties clientProperties,
             ReactiveClientRegistrationRepository clientRegistrationRepository,

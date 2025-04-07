@@ -48,6 +48,10 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer #  Ключ сериализуем как строку
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer #  Значение сериализуем как JSON
     bootstrap-servers: localhost:9092
+app:
+  kafka:
+    topic:
+      new-product: new-products
 logging:
   level:
     sql: info

@@ -18,7 +18,7 @@ import java.util.List;
 @ConditionalOnProperty(name = "eureka.client.enabled", havingValue = "true", matchIfMissing = true)
 public class DiscoveryBeans {
 
-    @Bean
+//    @Bean
     public DefaultEurekaClientHttpRequestFactorySupplier defaultEurekaClientHttpRequestFactorySupplier(
             RestTemplateTimeoutProperties restTemplateTimeoutProperties,
             ReactiveClientRegistrationRepository clientRegistrationRepository,

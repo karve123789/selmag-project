@@ -11,5 +11,7 @@ public interface RatingService {
     List<ProductRating> getAllProductRatings();
 
     void saveProductRatingRecord(Integer productId, Integer rating);
+
+    void incrementFavouriteCount(Integer productId);
 }
 
