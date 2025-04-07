@@ -4,6 +4,7 @@ import ag.selm.NewProductEvent;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,11 @@ public class KafkaProductProducer {
 
     private final KafkaTemplate<String, NewProductEvent> kafkaTemplate;
 
+    @Value("${app.kafka.topic.new-product}")
+    private String topicName;
+
     public void sendNewProductEvent(NewProductEvent event) {
         logger.info("Sending new product event: {}", event);
-        kafkaTemplate.send("new-products", event);
+        kafkaTemplate.send(topicName, event);
     }
 }

@@ -20,9 +20,11 @@ public class ProductRating {
     private Integer  productId;
 
     @Column( name = "rating_average")
-    private Integer ratingAverage;
+    private Integer ratingAverage; // Средний рейтинг
 
     @Column( name = "rating_count")
-    private Integer ratingCount;
-}
+    private Integer ratingCount; // Количество оценок
 
+    @Column( name = "favourite_count") // <-- НОВОЕ ПОЛЕ
+    private Integer favouriteCount; // Количество добавлений в избранное
+}

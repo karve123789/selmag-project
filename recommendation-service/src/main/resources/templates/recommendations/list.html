@@ -4,74 +4,58 @@
     <title>Product Recommendations</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        h2 {
-            color: #444;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        p {
-            color: #777;
-        }
-        .error-message {
-            color: red;
-            font-weight: bold;
-        }
+        /* Стили оставляем без изменений */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        h1 { color: #333; text-align: center; }
+        h2 { color: #444; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; color: #333; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        p { color: #777; }
+        .error-message { color: red; font-weight: bold; }
+        .no-data { font-style: italic; color: #888; }
     </style>
 </head>
 <body>
 <h1>Product Recommendations Service</h1>
-<p>Displaying product ratings from the recommendation service.</p>
+<p>Displaying product ratings and favourite counts.</p>
 
-<div th:if="${ratingsLoaded}">
-    <h2>Product Ratings:</h2>
-    <table border="1">
+<!-- Блок отображается, если ratingsLoaded=true и список не пустой -->
+<div th:if="${ratingsLoaded and not #lists.isEmpty(productRatings)}">
+    <h2>Product Stats:</h2>
+    <table> <!-- Убираем border="1", т.к. стили есть в CSS -->
         <thead>
         <tr>
             <th>Product ID</th>
             <th>Average Rating</th>
             <th>Rating Count</th>
+            <th>Favourite Count</th> <!-- НОВЫЙ ЗАГОЛОВОК -->
         </tr>
         </thead>
         <tbody>
-        <tr th:each="rating : ${productRatings}">
-            <td th:text="${rating.productId}"></td>
-            <td th:text="${rating.ratingAverage}"></td>
-            <td th:text="${rating.ratingCount}"></td>
+        <!-- Используем 'stat' как переменную цикла для ясности -->
+        <tr th:each="stat : ${productRatings}">
+            <td th:text="${stat.productId}"></td>
+            <!-- Форматирование среднего рейтинга, если нужно (например, 0 если null) -->
+            <td th:text="${stat.ratingAverage != null ? stat.ratingAverage : 0}"></td>
+            <td th:text="${stat.ratingCount != null ? stat.ratingCount : 0}"></td>
+            <!-- Отображаем счетчик избранного (0 если null) -->
+            <td th:text="${stat.favouriteCount != null ? stat.favouriteCount : 0}"></td>
         </tr>
         </tbody>
     </table>
 </div>
 
-<div th:unless="${ratingsLoaded}">
+<!-- Блок отображается, если ratingsLoaded=true, но список ПУСТОЙ -->
+<div th:if="${ratingsLoaded and #lists.isEmpty(productRatings)}">
+    <p class="no-data">No product stats available yet.</p>
+</div>
+
+<!-- Блок отображается, если ratingsLoaded=false (была ошибка) -->
+<div th:if="${not ratingsLoaded}">
     <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
-    <p>Failed to load product ratings.</p>
+    <p th:unless="${errorMessage}" class="error-message">Failed to load product stats due to an unexpected error.</p>
 </div>
 </body>
 </html>

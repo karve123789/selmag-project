@@ -1,28 +1,39 @@
 server:
   port: 8084
 spring:
+#  main: # <-- ДОБАВЬ ЭТУ СЕКЦИЮ
+#    allow-circular-references: false # <-- РАЗРЕШАЕМ ЦИКЛЫ
   application:
     name: selmag-feedback-service
-  boot:
+
+  kafka: # <-- Kafka здесь - ПРАВИЛЬНО
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    bootstrap-servers: localhost:9092
+
+  boot: # <-- Теперь под spring
     admin:
       client:
         url: http://localhost:8085
         instance:
           name: feedback-service
           service-host-type: ip
-        enabled: true
-  cloud:
+        enabled: false # изменил для ухода от цкл зависимсти
+
+  cloud: # <-- Теперь под spring
     config:
-      enabled: false
-  data:
+      enabled: false # <-- Теперь Spring увидит эту настройку
+
+  data: # <-- Теперь под spring
     mongodb:
       uri: mongodb://localhost:27017/feedback
-  security:
+
+  security: # <-- Теперь под spring
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8082/realms/selmag
-#          issuer-uri: http://172.17.0.1:8082/realms/selmag
       client:
         registration:
           keycloak:
@@ -41,7 +52,15 @@ spring:
         provider:
           keycloak:
             issuer-uri: http://localhost:8082/realms/selmag
-#            issuer-uri: http://172.17.0.1:8082/realms/selmag
+
+# --- Свойства вашего приложения ---
+app:
+  kafka:
+    topic:
+      product-reviews: product-reviews
+      favourite-products-events: favourite-products-events
+# ---------------------------------
+
 springdoc:
   swagger-ui:
     oauth:
@@ -59,12 +78,7 @@ management:
     web:
       exposure:
         include: '*'
-#  zipkin:
-#    tracing:
-#      endpoint: http://172.17.0.1:9411/api/v2/spans
-#  tracing:
-#    sampling:
-#      probability: 1.0
+
 eureka:
   client:
     enabled: false

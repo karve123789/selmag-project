@@ -17,6 +17,13 @@ spring:
       group-id: recommendation-service # ID группы потребителей
       auto-offset-reset: earliest #  Что делать, если нет начального offset-а или offset не существует на сервере
     bootstrap-servers: localhost:9092 #  Адрес Kafka broker
+app:
+  kafka:
+    topic:
+      new-product: new-products
+      product-reviews: product-reviews
+      favourite-products-events: favourite-products-events
+
   cloud:
     config:
       import-check:
