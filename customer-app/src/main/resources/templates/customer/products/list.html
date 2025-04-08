@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!-- Добавлен xmlns -->
 <head>
     <meta charset="UTF-8">
-    <title>Наши товары &ndash; Сельмаг</title>
+    <title>Наши товары – Сельмаг</title>
 </head>
 <body>
-<a data-th-href="@{/customer/products/favourites}">Избранные товары</a>
+<!-- Добавлены ссылки для навигации -->
+<div style="margin-bottom: 15px;">
+    <a data-th-href="@{/customer/products/favourites}" style="margin-right: 15px;">Избранные товары</a>
+    <a data-th-href="@{/recommendations/list}">Рекомендации и Статистика</a> <!-- НОВАЯ ССЫЛКА -->
+</div>
+<hr>
+
 <h1>Наши товары</h1>
 <form>
     <label>Фильтр: <input type="text" name="filter" data-th-value="${filter}"> <button type="submit">Поиск</button></label>

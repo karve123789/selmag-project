@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8"> <!-- Добавлена кодировка -->
+  <title>Product Recommendations</title>
+  <!-- Добавлены базовые стили, т.к. стили из layout не будут применены -->
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; padding: 15px; background-color: #f8f9fa; }
+    h1, h2 { color: #343a40; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    th, td { border: 1px solid #dee2e6; padding: 12px; text-align: left; }
+    th { background-color: #e9ecef; color: #495057; }
+    tr:nth-child(even) { background-color: #f2f2f2; }
+    .alert-danger { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 15px; margin-bottom: 15px; border-radius: 4px; }
+    .btn { display: inline-block; font-weight: 400; color: #212529; text-align: center; vertical-align: middle; cursor: pointer; background-color: transparent; border: 1px solid transparent; padding: 8px 15px; font-size: 1rem; line-height: 1.5; border-radius: 0.25rem; transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+    .btn-secondary { color: #fff; background-color: #6c757d; border-color: #6c757d; }
+    .btn-secondary:hover { color: #fff; background-color: #5a6268; border-color: #545b62; }
+    .mt-3 { margin-top: 1rem !important; } /* !important для переопределения возможных конфликтов */
+    .no-data { font-style: italic; color: #6c757d; }
+  </style>
+</head>
+<body> <!-- Убран тег <main>, т.к. он обычно является частью layout -->
+
+<h1>Product Recommendations & Stats</h1>
+
+<!-- Отображение ошибки -->
+<div th:if="${errorOccurred}" class="alert alert-danger" role="alert">
+  <p th:text="${errorMessage ?: 'An unexpected error occurred.'}">Error message</p>
+</div>
+
+<!-- Отображение таблицы, если нет ошибки и список не пуст -->
+<div th:unless="${errorOccurred}">
+  <div th:if="${not #lists.isEmpty(productStatsList)}">
+    <h2>Product Stats:</h2>
+    <table class="table table-striped"> <!-- Классы оставлены, вдруг стили где-то еще подключаются -->
+      <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Average Rating</th>
+        <th>Rating Count</th>
+        <th>Favourite Count</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Переменная цикла названа stat -->
+      <tr th:each="stat : ${productStatsList}">
+        <td th:text="${stat.productId}"></td>
+        <!-- Отображаем 0, если значение null -->
+        <td th:text="${stat.ratingAverage != null ? stat.ratingAverage : 0}"></td>
+        <td th:text="${stat.ratingCount != null ? stat.ratingCount : 0}"></td>
+        <td th:text="${stat.favouriteCount != null ? stat.favouriteCount : 0}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Сообщение, если список пуст -->
+  <div th:if="${#lists.isEmpty(productStatsList)}">
+    <p class="no-data">No product stats available yet.</p>
+  </div>
+</div>
+
+<!-- Ссылка назад -->
+<div class="mt-3">
+  <a th:href="@{/}" class="btn btn-secondary">Back to Home</a>
+</div>
+
+</body>
+</html>
