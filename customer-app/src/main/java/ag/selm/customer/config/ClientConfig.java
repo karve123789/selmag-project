@@ -7,6 +7,8 @@ import de.codecentric.boot.admin.client.config.ClientProperties;
 import de.codecentric.boot.admin.client.registration.ReactiveRegistrationClient;
 import de.codecentric.boot.admin.client.registration.RegistrationClient;
 import io.micrometer.observation.ObservationRegistry;
+import ag.selm.customer.client.RecommendationClient; // <-- Импорт интерфейса
+import ag.selm.customer.client.WebClientRecommendationClient; // <-- Импорт реализации
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -97,6 +99,17 @@ public class ClientConfig {
         return new WebClientProductReviewsClient(selmagServicesWebClientBuilder
                 .baseUrl(feedbackBaseUrl)
                 .build());
+    }
+
+    @Bean
+    public RecommendationClient webClientRecommendationClient(
+            @Value("${selmag.services.recommendation.uri:http://localhost:8086}") String recommendationBaseUrl,
+            WebClient.Builder selmagServicesWebClientBuilder
+    ) {
+        WebClient webClient = selmagServicesWebClientBuilder
+                .baseUrl(recommendationBaseUrl)
+                .build();
+        return new WebClientRecommendationClient(webClient);
     }
 
     @Bean
