@@ -1,0 +1,50 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: recommendation-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalogue?currentSchema=rating
+    username: catalogue
+    password: catalogue
+  flyway:
+    enabled: false
+#    locations: classpath:db/migration
+#    schemas:
+#      - rating
+  kafka:
+    consumer:
+      group-id: recommendation-service # ID группы потребителей
+      auto-offset-reset: earliest #  Что делать, если нет начального offset-а или offset не существует на сервере
+    bootstrap-servers: localhost:9092 #  Адрес Kafka broker
+app:
+  kafka:
+    topic:
+      new-product: new-products
+      product-reviews: product-reviews
+      favourite-products-events: favourite-products-events
+
+  cloud:
+    config:
+      import-check:
+        enabled: false # Отключаем Spring Cloud Config
+
+#  security:
+#    oauth2:
+#      client:
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8082/realms/selmag
+#            user-name-attribute: preferred_username
+#        registration:
+#          rating-service-app:
+#            provider: keycloak
+#            client-id: recommendation-service
+#            client-secret: wWWhkmIjaOYfcvhEWskT7ryVoP6ZNym9
+#            authorization-grant-type: client_credentials
+#            scope:
+#              - openid
+#              - view_catalogue
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8082/realms/selmag #  issuer-uri

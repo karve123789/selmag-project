@@ -17,9 +17,9 @@ public class ProductReview {
     @Id
     private UUID id;
 
-    private int productId;
+    private Integer productId;
 
-    private int rating;
+    private Integer rating;
 
     private String review;
 

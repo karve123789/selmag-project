@@ -22,6 +22,7 @@ spring:
     schemas:
       - public
       - catalogue
+      - rating
   jpa:
     show-sql: true
   security:
@@ -29,7 +30,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8082/realms/selmag
-#          issuer-uri: http://172.17.0.1:8082/realms/selmag
+      #          issuer-uri: http://172.17.0.1:8082/realms/selmag
       client:
         registration:
           keycloak:
@@ -41,7 +42,16 @@ spring:
         provider:
           keycloak:
             issuer-uri: http://localhost:8082/realms/selmag
-#            issuer-uri: http://172.17.0.1:8082/realms/selmag
+  #            issuer-uri: http://172.17.0.1:8082/realms/selmag
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer #  Ключ сериализуем как строку
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer #  Значение сериализуем как JSON
+    bootstrap-servers: localhost:9092
+app:
+  kafka:
+    topic:
+      new-product: new-products
 logging:
   level:
     sql: info

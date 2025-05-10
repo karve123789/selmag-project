@@ -21,7 +21,7 @@ public class SecurityBeans {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
                 .oauth2ResourceServer(customizer -> customizer.jwt(Customizer.withDefaults()))
-                .oauth2Client(Customizer.withDefaults())
+//                .oauth2Client(Customizer.withDefaults())
                 .build();
     }
 }
